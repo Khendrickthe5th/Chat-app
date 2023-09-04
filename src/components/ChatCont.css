@@ -26,7 +26,7 @@
     width: 100%;
     border-top: 1px solid rgba(128, 128, 128, 0.507);
     border-bottom: 1px solid rgba(128, 128, 128, 0.507);
-
+    overflow-y: auto;
 }
 
 .chatPartnerInfo{
@@ -162,4 +162,38 @@
 
 .chatActionsPanel > div:nth-of-type(1) > span:nth-of-type(1):active, .chatActionsPanel > div:nth-of-type(2) > span:nth-of-type(2):active, .chatActionsPanel > div:nth-of-type(2) > span:nth-of-type(1):active, .chatPanelPhoneIcon:active, .chatPanelVideoIcon:active{
     transform: scale(1.1)
+}
+
+.chatCanvas > div{
+    width: auto;
+    height: fit-content;
+    margin: 12px;
+    box-sizing: border-box;
+}
+.chatCanvas > div:nth-of-type(odd) > p{
+    width: fit-content;
+    max-width: 55%;
+    height: fit-content;
+    padding: 8px 18px 8px 18px;
+    margin-left: auto;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: white;
+    background-color:#ff3831;
+    box-shadow: -2px 1px 16px 0px #9f9f9f93;
+    text-align: end;
+}
+.chatCanvas > div:nth-of-type(even) > p{
+    width: fit-content;
+    max-width: 55%;
+    height: fit-content;
+    padding: 8px 18px 8px 18px;
+    margin-right: auto;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    background-color:#E1EBEE;
+    box-shadow: 2px 1px 16px 0px #9f9f9f28;
+    text-align: start;
 }
