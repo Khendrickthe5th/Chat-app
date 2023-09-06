@@ -170,7 +170,7 @@
     margin: 12px;
     box-sizing: border-box;
 }
-.chatCanvas > div:nth-of-type(odd){
+.chatCanvas > .chat-appsender{
     width: fit-content;
     max-width: 55%;
     height: fit-content;
@@ -184,7 +184,7 @@
     box-shadow: -2px 1px 16px 0px #9f9f9f93;
     text-align: start;
 }
-.chatCanvas > div:nth-of-type(even){
+.chatCanvas > .chat-appreceiver{
     width: fit-content;
     max-width: 55%;
     height: fit-content;
@@ -208,14 +208,14 @@
     margin: 0px;
     padding: 0px;
 }
-.chatCanvas > div:nth-of-type(odd) >p:nth-of-type(2){
+.chatCanvas > .chat-appsender >p:nth-of-type(2){
     font-size: 0.7rem;
     margin-top: 4px;
     text-align: end;
     color: rgb(240, 239, 239);
 }
 
-.chatCanvas > div:nth-of-type(even) > p:nth-of-type(2){
+.chatCanvas > .chat-appreceiver > p:nth-of-type(2){
     font-size: 0.7rem;
     margin-top: 4px;
     text-align: end;

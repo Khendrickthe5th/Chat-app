@@ -6,8 +6,11 @@ const socket = socketIO.connect('http://localhost:3100');
 
 
 function ChatCont(props) {
-const [messages, setMessages] = useState([])
+const chatCanvasRef = useRef()
 const inputFieldVal = useRef()
+
+
+const [messages, setMessages] = useState([])
 
 //   useEffect(() => {
 //     fetch("http://localhost:3100/getAllData", {
@@ -21,21 +24,21 @@ const inputFieldVal = useRef()
 
   useEffect(()=>{
     socket.emit("join", props.username)
-    socket.on("message", (data)=>{
+    socket.on("userList", (userList)=>{console.log(userList)})
+    chatCanvasRef.current.scrollBy(0, chatCanvasRef.current.scrollHeight)
+  })
+
+  socket.on("message", (data)=>{
         setMessages([...messages, data])
     })
-    console.log(messages)
-    socket.on("userList", (userList)=>{console.log(userList)})
-  })
 
   const emitMessages = ()=>{
     try{
-        socket.emit("message",
+      socket.emit("message",
         {
           "message": inputFieldVal.current.value,
           "sender": props.username,
           "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
-
       })
         inputFieldVal.current.value = ""
         inputFieldVal.current.focus()
@@ -44,6 +47,7 @@ const inputFieldVal = useRef()
         console.log("Oppps :", error)
     }
   }
+
 
 
 // ===========================================================================================
@@ -77,24 +81,14 @@ const inputFieldVal = useRef()
         </span>
       </div>
 
-      <div className="chatCanvas">
-      <div>
-        <p className="mesageVal">How are you doing, buddy?</p>
-        <p className="messageTime">7:19PM</p>
-      </div>
-        {messages && messages.map((message)=>{
-          return (<div>
-          <p className="mesageVal">{message.message}</p>
-          <p className="messageTime">{message.timeStamp}</p>
+      <div className="chatCanvas" ref={chatCanvasRef}>
+
+        {messages && messages.map((item, index)=>{
+          return (<div key={index} className={item.sender !== props.username ? "chat-appreceiver" : "chat-appsender"}>
+          <p className="mesageVal">{item.message}</p>
+          <p className="messageTime">{item.timeStamp}</p>
         </div>)
         })}
-
-        {/* <div><p>Hello😂😂</p></div>
-        <div><p>Hi😂😂</p></div>
-        <div><p>How are you doing, buddy?</p></div>
-        <div><p>Yo im good just tired man!</p></div>
-        <div><p>Odd and even are keywords that can be used to match child elements whose index is odd or even (the index of the first child is 1</p></div>
-        <div><p>If you're behind a reverse proxy such as apache or nginx please take a look at the documentation for it.If you're hosting your app in a folder that is not the root of your website e.g., https://example.com/chatappthen you also need to specify the path in both the server and the client.</p></div> */}
       </div>
 
       <div className="chatActionsPanel">
