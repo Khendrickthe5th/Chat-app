@@ -170,30 +170,54 @@
     margin: 12px;
     box-sizing: border-box;
 }
-.chatCanvas > div:nth-of-type(odd) > p{
+.chatCanvas > div:nth-of-type(odd){
     width: fit-content;
     max-width: 55%;
     height: fit-content;
-    padding: 8px 18px 8px 18px;
+    padding: 8px 18px 6px 18px;
     margin-left: auto;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 0.9rem;
     color: white;
     background-color:#ff3831;
     box-shadow: -2px 1px 16px 0px #9f9f9f93;
-    text-align: end;
+    text-align: start;
 }
-.chatCanvas > div:nth-of-type(even) > p{
+.chatCanvas > div:nth-of-type(even){
     width: fit-content;
     max-width: 55%;
     height: fit-content;
-    padding: 8px 18px 8px 18px;
+    padding: 8px 18px 6px 18px;
     margin-right: auto;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 0.9rem;
     background-color:#E1EBEE;
     box-shadow: 2px 1px 16px 0px #9f9f9f28;
     text-align: start;
+}
+
+/* .chatCanvas > div:nth-of-type(odd) >p:nth-of-type(1){
+    margin-right: calc(0.7rem*3);
+}
+.chatCanvas > div:nth-of-type(even) >p:nth-of-type(1){
+    margin-left: calc(0.7rem*3)
+} */
+.chatCanvas > div > p{
+    margin: 0px;
+    padding: 0px;
+}
+.chatCanvas > div:nth-of-type(odd) >p:nth-of-type(2){
+    font-size: 0.7rem;
+    margin-top: 4px;
+    text-align: end;
+    color: rgb(240, 239, 239);
+}
+
+.chatCanvas > div:nth-of-type(even) > p:nth-of-type(2){
+    font-size: 0.7rem;
+    margin-top: 4px;
+    text-align: end;
+    color: grey;
 }

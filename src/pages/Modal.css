@@ -4,7 +4,7 @@
     box-sizing: border-box;
     overflow: hidden;
 }
-.modal{
+/* .modal{
 width: 100vw;
 height: 100vh;
 position: absolute;
@@ -13,8 +13,18 @@ place-items: center;
 background-color: rgb(0, 0, 0);
 z-index: 100;
 color: white;
-}
+} */
 
+.modal{
+width: 100vw;
+height: 100vh;
+/* position: absolute; */
+display: grid;
+place-items: center;
+background-color: rgb(0, 0, 0);
+/* z-index: 100; */
+color: white;
+}
 button{
     font-size: 1rem;
     padding: 10px;

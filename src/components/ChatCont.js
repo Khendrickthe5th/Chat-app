@@ -5,7 +5,7 @@ import "./ChatCont.css";
 const socket = socketIO.connect('http://localhost:3100');
 
 
-function ChatCont() {
+function ChatCont(props) {
 const [messages, setMessages] = useState([])
 const inputFieldVal = useRef()
 
@@ -20,15 +20,23 @@ const inputFieldVal = useRef()
 //   });
 
   useEffect(()=>{
+    socket.emit("join", props.username)
     socket.on("message", (data)=>{
         setMessages([...messages, data])
     })
     console.log(messages)
+    socket.on("userList", (userList)=>{console.log(userList)})
   })
 
   const emitMessages = ()=>{
     try{
-        socket.emit("message", inputFieldVal.current.value)
+        socket.emit("message",
+        {
+          "message": inputFieldVal.current.value,
+          "sender": props.username,
+          "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+
+      })
         inputFieldVal.current.value = ""
         inputFieldVal.current.focus()
     }
@@ -44,7 +52,7 @@ const inputFieldVal = useRef()
       <div className="chatInfoPanel">
         <span>
           <div className="chatPartnerInfo">
-            <div>Dubem King</div>
+            <div>{props.username}</div>
             <div>
               <div>
                 <MapPin size={15} />
@@ -70,8 +78,15 @@ const inputFieldVal = useRef()
       </div>
 
       <div className="chatCanvas">
+      <div>
+        <p className="mesageVal">How are you doing, buddy?</p>
+        <p className="messageTime">7:19PM</p>
+      </div>
         {messages && messages.map((message)=>{
-          return <div><p>{message}</p></div>
+          return (<div>
+          <p className="mesageVal">{message.message}</p>
+          <p className="messageTime">{message.timeStamp}</p>
+        </div>)
         })}
 
         {/* <div><p>Hello😂😂</p></div>
