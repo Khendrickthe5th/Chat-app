@@ -37,7 +37,7 @@ const toggleChatContactsVisible = ()=>{
       {/* <Modal setUsername={setUsername}/> */}
 
       <NavBar toggleChatContactsVisible={toggleChatContactsVisible}/>
-      { ChatContactsVisible && <ChatContacts />}
+      { ChatContactsVisible && <ChatContacts username={props.username} />}
       < ChatCont username={props.username}/>
 
 {/*       

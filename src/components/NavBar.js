@@ -1,5 +1,6 @@
 import { ChatsCircle, Gear, SignOut } from "@phosphor-icons/react";
 import "./NavBar.css";
+import {Link} from "react-router-dom"
 
 
 
@@ -22,7 +23,7 @@ function NavBar({toggleChatContactsVisible}) {
                 </span>
 
                 <span className="icon3">
-                    <SignOut size={25} color={"#fff"}/>
+                <Link to="/"><SignOut size={25} color={"#fff"}/></Link>
                 </span>
                 </div>
             </div>

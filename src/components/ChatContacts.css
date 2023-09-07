@@ -7,8 +7,9 @@
 }
 .chat{
     width: 350px;
-    height: auto;
+    height: calc(100% - 90px);
     background-color: #E1EBEE;
+    overflow: auto;
 }
 .searchBoxCont{
     height: 90px;
@@ -34,51 +35,74 @@
     margin-left: 5px;
     width: 250px;
 }
-
+.convoHeaderCont{
+    padding: 0px 15px 0px 15px;
+}
+.convoHeaderCont:hover{
+    background-color: #f2fdff;
+}
 .convoHeader{
     width: 100%;
     height: fit-content;
-    border: 1px solid black;
-    padding: 10px 15px 10px 15px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.329);
+    cursor: pointer;
 }
 .dpImgCont > p{
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background-color:rgba(128, 128, 128, 0.589);
     border-radius: 50%;
+    flex-shrink: 0;
 }
 .dpImgCont{
+    margin: 8px 0px 8px 0px;
     margin-right: 10px
 }
 .lastConvoDetail{
-    width: auto;
+    width: calc(100% - 70px);
     height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid red;
+    gap: 4px;
+}
+.usrnameAndTime{
+    width: 100%;
+    height: auto;
+    display: flex;
 }
 .usrnameAndTime > span:nth-of-type(1){
+    margin-right: auto;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 .usrnameAndTime > span:nth-of-type(2){
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 300;
-    font-size: 0.8rem;
-    margin-left: auto;
+    font-size: 0.7rem;
+    color: grey;
 }
 .textPeek{
-    width: 100%;
-    border: 1px solid green;
+    min-width: 10px;
     height: fit-content;
 }
-.textPeek > div{
-    width: auto;
-    height: fit-content;
+.textPeek > p{
+    margin: 0px;
+    padding: 0px;
     overflow: hidden;
-    /* text-overflow: ellipsis; */
-    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.9rem;
 }

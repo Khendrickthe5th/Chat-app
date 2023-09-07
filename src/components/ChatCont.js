@@ -23,22 +23,31 @@ const [messages, setMessages] = useState([])
 //   });
 
   useEffect(()=>{
-    socket.emit("join", props.username)
-    socket.on("userList", (userList)=>{console.log(userList)})
+    
+    // socket.on("userList", (userList)=>{props.setOnlineUsers(userList)})
     chatCanvasRef.current.scrollBy(0, chatCanvasRef.current.scrollHeight)
   })
 
   socket.on("message", (data)=>{
         setMessages([...messages, data])
     })
+    socket.on("privateMessage", (data)=>{
+      setMessages([...messages, data])
+  })
 
   const emitMessages = ()=>{
     try{
-      socket.emit("message",
-        {
-          "message": inputFieldVal.current.value,
-          "sender": props.username,
-          "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+      // socket.emit("message",
+      //   {
+      //     "message": inputFieldVal.current.value,
+      //     "sender": props.username,
+      //     "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+      // })
+
+      socket.emit("privateMessage", {
+        "message": inputFieldVal.current.value,
+        "sender": props.username + "fAbx6GFvxf6(",
+        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
       })
         inputFieldVal.current.value = ""
         inputFieldVal.current.focus()
