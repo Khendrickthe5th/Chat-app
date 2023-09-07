@@ -34,3 +34,51 @@
     margin-left: 5px;
     width: 250px;
 }
+
+.convoHeader{
+    width: 100%;
+    height: fit-content;
+    border: 1px solid black;
+    padding: 10px 15px 10px 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.dpImgCont > p{
+    width: 50px;
+    height: 50px;
+    background-color:rgba(128, 128, 128, 0.589);
+    border-radius: 50%;
+}
+.dpImgCont{
+    margin-right: 10px
+}
+.lastConvoDetail{
+    width: auto;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid red;
+}
+.usrnameAndTime > span:nth-of-type(1){
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.usrnameAndTime > span:nth-of-type(2){
+    font-weight: 300;
+    font-size: 0.8rem;
+    margin-left: auto;
+}
+.textPeek{
+    width: 100%;
+    border: 1px solid green;
+    height: fit-content;
+}
+.textPeek > div{
+    width: auto;
+    height: fit-content;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+}
