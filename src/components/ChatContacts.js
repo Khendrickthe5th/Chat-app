@@ -8,19 +8,20 @@ const socket = socketIO.connect("http://localhost:3100")
 function ChatContacts(props){
     const [onlineUsers, setOnlineUsers] = useState()
     const allConvo = useRef()
+    const chatHeadName = useRef()
 
-    socket.on("userList", (userList)=>{setOnlineUsers(userList)})
-    socket.emit("join", props.username + "fAbx6GFvxf6(")
 
     useEffect(()=>{
-        console.log("Chat heads rendered!")
-    for(const item of allConvo.current.children){
-        item.addEventListener("click", (e)=>{
-            socket.emit("join", props.username + "fAbx6GFvxf6(")
-            console.log("join request event emitted!")
-    })}
+        socket.on("userListRen", (userList)=>{
+        setOnlineUsers(userList)
     })
+    },[ onlineUsers])
 
+    const addClickEvent = (e)=>{
+        socket.emit("join", {"roomId": e.target.innerText})
+            props.setCurrentChatRecvr(e.target.innerText)
+            console.log(props.username)
+    }
 
     return(
         <section className="ChatContactsCont">
@@ -34,14 +35,14 @@ function ChatContacts(props){
             <div className="chat" ref={allConvo}>
             {onlineUsers && Object.entries(onlineUsers).map((item, index)=>{
                 return(
-                    <div key={index} className="convoHeaderCont">
+                    <div key={index} className="convoHeaderCont" onClick={addClickEvent}>
             <div className="convoHeader">
                 <div className="dpImgCont">
                     <p></p>
                 </div>
                 <div className="lastConvoDetail">
                     <div className="usrnameAndTime">
-                        <span>{item[1]}</span>
+                        <span ref={chatHeadName}>{item[0]}</span>
                         <span>4:54PM</span>
                     </div>
                     <div className="textPeek">

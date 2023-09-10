@@ -21,36 +21,44 @@ const [messages, setMessages] = useState([])
 //       .then((res) => res.json())
 //       .then((data) => console.log(data));
 //   });
+let roomId = props.username
+let isRoomCreated = false;
+socket.emit("userList", props.username)
 
   useEffect(()=>{
-    
+    if(!isRoomCreated){
+      socket.emit("createRoom", roomId)
+      isRoomCreated = true;
+      console.log(roomId, "Created!", isRoomCreated)
+    }
     // socket.on("userList", (userList)=>{props.setOnlineUsers(userList)})
     chatCanvasRef.current.scrollBy(0, chatCanvasRef.current.scrollHeight)
-  })
+  }, [messages, roomId])
 
-  socket.on("message", (data)=>{
-        setMessages([...messages, data])
-    })
-    socket.on("privateMessage", (data)=>{
-      setMessages([...messages, data])
-  })
+  socket.on("privateMessage", ({message})=>{
+    setMessages([...messages, message])
+    console.log(message, "yoloo")
+})
 
   const emitMessages = ()=>{
     try{
-      // socket.emit("message",
-      //   {
-      //     "message": inputFieldVal.current.value,
-      //     "sender": props.username,
-      //     "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
-      // })
-
       socket.emit("privateMessage", {
         "message": inputFieldVal.current.value,
-        "sender": props.username + "fAbx6GFvxf6(",
+        "sender": props.username,
+        "receiver": props.currentChatRecvr,
         "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
       })
+      
+      setMessages([...messages, {
+        "message": inputFieldVal.current.value,
+        "sender": props.username,
+        "receiver": props.currentChatRecvr,
+        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+      }])
         inputFieldVal.current.value = ""
         inputFieldVal.current.focus()
+        console.log(messages)
+        
     }
     catch(error){
         console.log("Oppps :", error)
@@ -65,7 +73,7 @@ const [messages, setMessages] = useState([])
       <div className="chatInfoPanel">
         <span>
           <div className="chatPartnerInfo">
-            <div>{props.username}</div>
+            <div>{props.currentChatRecvr}</div>
             <div>
               <div>
                 <MapPin size={15} />
@@ -104,7 +112,7 @@ const [messages, setMessages] = useState([])
         <div>
           <span>
             <Smiley size={25} />
-          </span>{" "}
+          </span>
           <input ref={inputFieldVal} type="text" placeholder="Your message here..." />
         </div>
         <div>

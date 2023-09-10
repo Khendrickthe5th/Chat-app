@@ -8,7 +8,8 @@ import React, {useEffect, useRef, useState} from 'react'
 
 function Main(props) {
 const [ChatContactsVisible, setChatContactsVisible] = useState(true)
-const chatValue = useRef()
+const [currentChatRecvr, setCurrentChatRecvr] = useState()
+// const chatValue = useRef()
 // const [username, setUsername] = useState(null)
 
 // useEffect(()=>{
@@ -37,8 +38,8 @@ const toggleChatContactsVisible = ()=>{
       {/* <Modal setUsername={setUsername}/> */}
 
       <NavBar toggleChatContactsVisible={toggleChatContactsVisible}/>
-      { ChatContactsVisible && <ChatContacts username={props.username} />}
-      < ChatCont username={props.username}/>
+      { ChatContactsVisible && <ChatContacts setCurrentChatRecvr={setCurrentChatRecvr} username={props.username} />}
+      < ChatCont username={props.username} currentChatRecvr={currentChatRecvr} />
 
 {/*       
 { chat !== null && chat !== undefined &&  chat.length !== 0 ? chat.map((item, index)=>{
