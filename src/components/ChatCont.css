@@ -24,6 +24,8 @@
 .chatCanvas{
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
     border-top: 1px solid rgba(128, 128, 128, 0.507);
     border-bottom: 1px solid rgba(128, 128, 128, 0.507);
     overflow-y: auto;
@@ -164,17 +166,18 @@
     transform: scale(1.1)
 }
 
-.chatCanvas > div{
+/* .chatCanvas > div{
     width: auto;
     height: fit-content;
     margin: 12px;
     box-sizing: border-box;
-}
+} */
 .chatCanvas > .chat-appsender{
     width: fit-content;
     max-width: 55%;
     height: fit-content;
     padding: 8px 18px 6px 18px;
+    margin: 12px;
     margin-left: auto;
     cursor: pointer;
     border-radius: 10px;
@@ -189,6 +192,7 @@
     max-width: 55%;
     height: fit-content;
     padding: 8px 18px 6px 18px;
+    margin: 12px;
     margin-right: auto;
     cursor: pointer;
     border-radius: 10px;
@@ -221,3 +225,43 @@
     text-align: end;
     color: grey;
 }
+
+/* --------------------------------Loader Animation Top-------------------------------------- */
+	.loaderXYZabc {
+        width: auto;
+        height: auto;
+		text-align: start;
+        margin: 20px;
+        margin-top: auto;
+	}
+
+	.loaderXYZabc span {
+		display: inline-block;
+		vertical-align: middle;
+		width: 15px;
+		height: 15px;
+		background: black;
+		border-radius: 15px;
+		animation: loader 1000ms infinite alternate;
+	}
+
+	.loaderXYZabc span:nth-of-type(2) {
+		animation-delay: 0.2s;
+	}
+
+	.loaderXYZabc span:nth-of-type(3) {
+		animation-delay: 0.6s;
+	}
+
+	@keyframes loader {
+		0% {
+			opacity: 0.9;
+			transform: scale(0.5);
+		}
+
+		100% {
+			opacity: 0.1;
+			transform: scale(1);
+		}
+	}
+/* -------------------------------------Loader Animation End----------------------------------- */

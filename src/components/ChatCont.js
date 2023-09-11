@@ -8,6 +8,7 @@ const socket = socketIO.connect('http://localhost:3100');
 function ChatCont(props) {
 const chatCanvasRef = useRef()
 const inputFieldVal = useRef()
+const [isTyping, setIsTyping] = useState(false)
 
 
 const [messages, setMessages] = useState([])
@@ -40,6 +41,17 @@ socket.emit("userList", props.username)
     console.log(message, "yoloo")
 })
 
+const setTyping = function(){
+  socket.emit("typing", props.currentChatRecvr)
+}
+
+socket.on("typing", (chatHead)=>{
+  if(props.username == chatHead){
+    setIsTyping(true)
+    setTimeout(()=>{ setIsTyping(false)}, 4000)
+  }
+})
+
   const emitMessages = ()=>{
     try{
       socket.emit("privateMessage", {
@@ -65,6 +77,31 @@ socket.emit("userList", props.username)
     }
   }
 
+  const emitMessagesKeybrd = (event)=>{
+    if(event.key === "Enter"){
+    try{
+      socket.emit("privateMessage", {
+        "message": inputFieldVal.current.value,
+        "sender": props.username,
+        "receiver": props.currentChatRecvr,
+        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+      })
+      
+      setMessages([...messages, {
+        "message": inputFieldVal.current.value,
+        "sender": props.username,
+        "receiver": props.currentChatRecvr,
+        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+      }])
+        inputFieldVal.current.value = ""
+        inputFieldVal.current.focus()
+        console.log(messages)
+        
+    }
+    catch(error){
+        console.log("Oppps :", error)
+    }
+  }}
 
 
 // ===========================================================================================
@@ -101,11 +138,20 @@ socket.emit("userList", props.username)
       <div className="chatCanvas" ref={chatCanvasRef}>
 
         {messages && messages.map((item, index)=>{
-          return (<div key={index} className={item.sender !== props.username ? "chat-appreceiver" : "chat-appsender"}>
+
+          return (item.receiver == props.username || item.receiver == props.currentChatRecvr ? <div key={index} className={item.sender !== props.username ? "chat-appreceiver" : "chat-appsender"}>
+            
           <p className="mesageVal">{item.message}</p>
           <p className="messageTime">{item.timeStamp}</p>
-        </div>)
+        </div> : <></>)
         })}
+
+  {isTyping ? <div className="loaderXYZabc">
+		<span></span>
+		<span></span>
+		<span></span>
+    </div> : <></>}
+
       </div>
 
       <div className="chatActionsPanel">
@@ -113,7 +159,7 @@ socket.emit("userList", props.username)
           <span>
             <Smiley size={25} />
           </span>
-          <input ref={inputFieldVal} type="text" placeholder="Your message here..." />
+          <input ref={inputFieldVal} onChange={setTyping} onKeyUp={emitMessagesKeybrd} type="text" placeholder="Your message here..." />
         </div>
         <div>
           <span>

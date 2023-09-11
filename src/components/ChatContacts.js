@@ -19,8 +19,8 @@ function ChatContacts(props){
 
     const addClickEvent = (e)=>{
         socket.emit("join", {"roomId": e.target.innerText})
-            props.setCurrentChatRecvr(e.target.innerText)
-            console.log(props.username)
+            props.setCurrentChatRecvr(e.target.getAttribute("data-onlineFrnd"))
+            console.log(e.target.getAttribute("data-onlineFrnd"))
     }
 
     return(
@@ -34,24 +34,23 @@ function ChatContacts(props){
 
             <div className="chat" ref={allConvo}>
             {onlineUsers && Object.entries(onlineUsers).map((item, index)=>{
-                return(
-                    <div key={index} className="convoHeaderCont" onClick={addClickEvent}>
+                return( item[0] !== props.username ? <div key={index} className="convoHeaderCont" onClick={addClickEvent}>
             <div className="convoHeader">
                 <div className="dpImgCont">
                     <p></p>
                 </div>
-                <div className="lastConvoDetail">
-                    <div className="usrnameAndTime">
-                        <span ref={chatHeadName}>{item[0]}</span>
-                        <span>4:54PM</span>
+                {console.log("rendered users", item[0], "username", props.username)}
+                <div className="lastConvoDetail" data-onlinefrnd={item[0]}>
+                    <div className="usrnameAndTime" data-onlinefrnd={item[0]}>
+                        <span ref={chatHeadName} data-onlinefrnd={item[0]}>{item[0]}</span>
+                        <span data-onlinefrnd={item[0]}>4:54PM</span>
                     </div>
-                    <div className="textPeek">
-                        <p>So where are we hanging out next?, i really wanna meet you again</p>
+                    <div className="textPeek" data-onlinefrnd={item[0]}>
+                        <p data-onlinefrnd={item[0]}>So where are we hanging out next?, i really wanna meet you again</p>
                     </div>
                 </div>
             </div>
-            </div>
-                )
+            </div> : <div key={index}></div>)
             })}
 
             </div>
