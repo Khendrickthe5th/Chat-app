@@ -2,6 +2,7 @@ import { Phone, VideoCamera, MapPin, Smiley, Paperclip, PaperPlaneTilt } from "@
 import React, { useEffect, useState, useRef } from "react";
 import socketIO from 'socket.io-client'
 import "./ChatCont.css";
+import EmojiPad from "./EmojiPad"
 const socket = socketIO.connect('http://localhost:3100');
 
 
@@ -9,6 +10,7 @@ function ChatCont(props) {
 const chatCanvasRef = useRef()
 const inputFieldVal = useRef()
 const chatRecipient = useRef()
+const [EmojiPadVisible, setEmojiPadVisible] = useState(false)
 const [isTyping, setIsTyping] = useState(false)
 const [messages, setMessages] = useState([])
 
@@ -100,7 +102,14 @@ socket.on("typing", (chatHead)=>{
     }
   }}
 
-
+  const changeEmojiVisibility = function(){
+    if(!EmojiPadVisible){
+      setEmojiPadVisible(true)
+    }
+    else{
+      setEmojiPadVisible(false)
+    }
+  }
 // ===========================================================================================
   return (
     <section className="chatCont">
@@ -148,13 +157,14 @@ socket.on("typing", (chatHead)=>{
 		<span></span>
     </div> : <></>}
 
+        {EmojiPadVisible ? <EmojiPad inputFieldVal={inputFieldVal}/> : <></>}
+          
       </div>
 
       <div className="chatActionsPanel">
-        {console.log(messages, "Buhari!")}
         <div>
           <span>
-            <Smiley size={25} />
+            <Smiley size={25} onClick={changeEmojiVisibility}/>
           </span>
           <input ref={inputFieldVal} onChange={setTyping} onKeyUp={emitMessagesKeybrd} type="text" placeholder="Your message here..." />
         </div>

@@ -1,10 +1,9 @@
 // import '../App.css';
 // import Modal from "./Modal"
 import NavBar from "../components/NavBar"
-import {Routes, Route} from "react-router-dom"
 import ChatCont from "../components/ChatCont"
 import ChatContacts from "../components/ChatContacts"
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useState } from 'react'
 
 function Main(props) {
 const [ChatContactsVisible, setChatContactsVisible] = useState(true)

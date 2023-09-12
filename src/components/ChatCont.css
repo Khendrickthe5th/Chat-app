@@ -6,7 +6,8 @@
     flex-direction: column;
     margin: 0px;
     padding-left: 30px;
-    padding-right: 30px
+    padding-right: 30px;
+    position: relative;
 }
 .chatInfoPanel{
     width: 100%;
