@@ -8,9 +8,8 @@ const socket = socketIO.connect('http://localhost:3100');
 function ChatCont(props) {
 const chatCanvasRef = useRef()
 const inputFieldVal = useRef()
+const chatRecipient = useRef()
 const [isTyping, setIsTyping] = useState(false)
-
-
 const [messages, setMessages] = useState([])
 
 //   useEffect(() => {
@@ -32,13 +31,11 @@ socket.emit("userList", props.username)
       isRoomCreated = true;
       console.log(roomId, "Created!", isRoomCreated)
     }
-    // socket.on("userList", (userList)=>{props.setOnlineUsers(userList)})
     chatCanvasRef.current.scrollBy(0, chatCanvasRef.current.scrollHeight)
   }, [messages, roomId])
-
   socket.on("privateMessage", ({message})=>{
     setMessages([...messages, message])
-    console.log(message, "yoloo")
+    // console.log(messages)
 })
 
 const setTyping = function(){
@@ -110,7 +107,7 @@ socket.on("typing", (chatHead)=>{
       <div className="chatInfoPanel">
         <span>
           <div className="chatPartnerInfo">
-            <div>{props.currentChatRecvr}</div>
+            <div ref={chatRecipient}>{props.currentChatRecvr}</div>
             <div>
               <div>
                 <MapPin size={15} />
@@ -139,14 +136,13 @@ socket.on("typing", (chatHead)=>{
 
         {messages && messages.map((item, index)=>{
 
-          return (item.receiver == props.username || item.receiver == props.currentChatRecvr ? <div key={index} className={item.sender !== props.username ? "chat-appreceiver" : "chat-appsender"}>
-            
+          return (item.receiver === props.currentChatRecvr || item.sender === props.currentChatRecvr ? <div key={index} className={item.sender !== props.username ? "chat-appreceiver" : "chat-appsender"}>
           <p className="mesageVal">{item.message}</p>
           <p className="messageTime">{item.timeStamp}</p>
         </div> : <></>)
         })}
 
-  {isTyping ? <div className="loaderXYZabc">
+  {isTyping && chatRecipient.current.innerText !== "" ? <div className="loaderXYZabc">
 		<span></span>
 		<span></span>
 		<span></span>
@@ -155,6 +151,7 @@ socket.on("typing", (chatHead)=>{
       </div>
 
       <div className="chatActionsPanel">
+        {console.log(messages, "Buhari!")}
         <div>
           <span>
             <Smiley size={25} />

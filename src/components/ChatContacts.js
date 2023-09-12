@@ -20,7 +20,7 @@ function ChatContacts(props){
     const addClickEvent = (e)=>{
         socket.emit("join", {"roomId": e.target.innerText})
             props.setCurrentChatRecvr(e.target.getAttribute("data-onlineFrnd"))
-            console.log(e.target.getAttribute("data-onlineFrnd"))
+            // console.log(e.target.getAttribute("data-onlineFrnd"))
     }
 
     return(
@@ -39,7 +39,7 @@ function ChatContacts(props){
                 <div className="dpImgCont">
                     <p></p>
                 </div>
-                {console.log("rendered users", item[0], "username", props.username)}
+                {/* {console.log("rendered users", item[0], "username", props.username)} */}
                 <div className="lastConvoDetail" data-onlinefrnd={item[0]}>
                     <div className="usrnameAndTime" data-onlinefrnd={item[0]}>
                         <span ref={chatHeadName} data-onlinefrnd={item[0]}>{item[0]}</span>
