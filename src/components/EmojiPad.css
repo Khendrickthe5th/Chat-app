@@ -1,5 +1,5 @@
 .emojiPadCont{
-    position: relative;
+    position: absolute;
     width: 280px;
     max-width: 350px;
     height: 300px;
@@ -7,7 +7,7 @@
     border-radius: 10px;
     margin: 20px;
     margin-top: auto;
-    bottom: 10px;
+    bottom: 100px;
     box-shadow: 4px 4px 13px rgba(0, 0, 0, 0.137);
 }
 

@@ -57,14 +57,14 @@ socket.on("typing", (chatHead)=>{
         "message": inputFieldVal.current.value,
         "sender": props.username,
         "receiver": props.currentChatRecvr,
-        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+        "timeStamp": formatAMPM(new Date),
       })
       
       setMessages([...messages, {
         "message": inputFieldVal.current.value,
         "sender": props.username,
         "receiver": props.currentChatRecvr,
-        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+        "timeStamp": formatAMPM(new Date),
       }])
         inputFieldVal.current.value = ""
         inputFieldVal.current.focus()
@@ -83,14 +83,14 @@ socket.on("typing", (chatHead)=>{
         "message": inputFieldVal.current.value,
         "sender": props.username,
         "receiver": props.currentChatRecvr,
-        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+        "timeStamp": formatAMPM(new Date),
       })
       
       setMessages([...messages, {
         "message": inputFieldVal.current.value,
         "sender": props.username,
         "receiver": props.currentChatRecvr,
-        "timeStamp": `${new Date().getHours().toString()}:${new Date().getMinutes().toString()}PM`,
+        "timeStamp": formatAMPM(new Date),
       }])
         inputFieldVal.current.value = ""
         inputFieldVal.current.focus()
@@ -110,6 +110,18 @@ socket.on("typing", (chatHead)=>{
       setEmojiPadVisible(false)
     }
   }
+
+  function formatAMPM(date){
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
 // ===========================================================================================
   return (
     <section className="chatCont">
