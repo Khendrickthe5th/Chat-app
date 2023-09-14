@@ -13,8 +13,10 @@ function ChatContacts(props){
 
 
     useEffect(()=>{
+        console.log("online users redndered")
         socket.on("userListRen", (userList)=>{
         setOnlineUsers(userList)
+        console.log("received event from server")
     })
     },[ onlineUsers])
 
