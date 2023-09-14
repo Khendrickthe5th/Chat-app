@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import socketIO from 'socket.io-client'
 import "./ChatCont.css";
 import EmojiPad from "./EmojiPad"
-const socket = socketIO.connect('chat-app-production-170a.up.railway.app')
+const socket = socketIO.connect('https://chat-app-test-pwrp.onrender.com')
 // const socket = socketIO.connect("http://localhost:3100")
 
 
