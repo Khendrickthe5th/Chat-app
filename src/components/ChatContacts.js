@@ -2,7 +2,8 @@ import "./ChatContacts.css"
 import { MagnifyingGlass } from "@phosphor-icons/react"
 import React, { useState, useEffect, useRef } from "react"
 import socketIO from "socket.io-client"
-const socket = socketIO.connect("http://localhost:3100")
+const socket = socketIO.connect("chat-app-production-170a.up.railway.app")
+// const socket = socketIO.connect("http://localhost:3100")
 
 
 function ChatContacts(props){

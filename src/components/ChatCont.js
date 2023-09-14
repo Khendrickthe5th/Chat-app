@@ -4,6 +4,7 @@ import socketIO from 'socket.io-client'
 import "./ChatCont.css";
 import EmojiPad from "./EmojiPad"
 const socket = socketIO.connect('chat-app-production-170a.up.railway.app')
+// const socket = socketIO.connect("http://localhost:3100")
 
 
 function ChatCont(props) {
